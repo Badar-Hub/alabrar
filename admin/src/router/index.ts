@@ -4,22 +4,33 @@ import Home from "../views/Home.vue";
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "Dashboard",
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/dataEntry",
+    name: "Data Entry",
+    component: () => import("@/domain/unAuthorized/unAuthorized.vue"),
   },
   {
-    path: "/sp",
-    name: "UnAuthorized",
-    component: () => import("@/domain/unAuthorized/unAuthorized.vue"),
+    path: "/data",
+    name: "Authorized",
+    component: () => import("@/domain/authorized/authorized.vue"),
+  },
+  {
+    path: "/admin",
+    name: "Admin Portal",
+    component: () => import("@/domain/user/admin/admin.vue"),
+  },
+  {
+    path: "/register",
+    name: "Register User",
+    component: () => import("@/domain/user/register.vue"),
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("@/domain/user/login.vue"),
   },
 ];
 

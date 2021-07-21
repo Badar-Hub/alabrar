@@ -1,6 +1,8 @@
 import testRoutes from './test.route';
 import profileRoutes from './profile.route';
 import unAuthorizedRoutes from './unAuthorized.route';
+import authorizedRoutes from './authorized.route';
+import authRoutes from './auth.route';
 
 //Private endpoints registered in List
 //List is iteratively registered in main index file
@@ -17,6 +19,14 @@ const authenticatedRoutes = [
   {
     path: '/unAuthorized',
     route: unAuthorizedRoutes,
+  },
+  {
+    path: '/authorized',
+    route: authorizedRoutes,
+  },
+  {
+    path: '/auth',
+    route: authRoutes,
   },
 ];
 

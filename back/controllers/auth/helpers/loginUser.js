@@ -19,10 +19,7 @@ export const loginUser = async (req, res) => {
 
   try {
     //Making sure that the user exists
-    const isExisting = await UserSchema.findOne(
-      { email },
-      { _id: 1, password: 1 },
-    );
+    const isExisting = await UserSchema.findOne({ email });
     if (!isExisting) {
       return res.json({
         success: false,
@@ -55,10 +52,7 @@ export const loginUser = async (req, res) => {
     //Generating the access token
     const access_token = jwt.sign(
       {
-        user: {
-          user_id: isExisting._id,
-          email: email,
-        },
+        user: { ...isExisting._doc },
       },
       process.env.JWT_SECRET,
       {

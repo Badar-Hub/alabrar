@@ -79,11 +79,13 @@ router.post(
       res,
       next,
       {
+        username: req.body.username,
         email: req.body.email,
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
       },
       {
+        username: 'required|string',
         email: 'required|string|email',
         password:
           'required|string|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
@@ -397,6 +399,42 @@ router.patch(
     );
   },
   auth.resetPassword,
+);
+
+router.get(
+  '/validateToken',
+  (req, res, next) => {
+    validation(
+      req,
+      res,
+      next,
+      {
+        token: req.headers.authorization,
+      },
+      {
+        token: 'required|string',
+      },
+    );
+  },
+  auth.validatorToken,
+);
+
+router.put(
+  '/updateRole',
+  (req, res, next) => {
+    validation(
+      req,
+      res,
+      next,
+      {
+        role: req.body.role,
+      },
+      {
+        role: 'required|string',
+      },
+    );
+  },
+  auth.userRole,
 );
 
 module.exports = router;

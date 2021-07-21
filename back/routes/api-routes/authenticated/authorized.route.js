@@ -1,12 +1,12 @@
 import express from 'express';
 import { isAuthorized } from 'middlewares/roles';
-import { unAuthorized } from '~/controllers';
+import { authorized } from '~/controllers';
 import { validate as validation } from '~/middlewares';
 import { roles } from '~/constants';
 
 const router = express.Router();
 
-router.get('/', isAuthorized(roles.admin), unAuthorized.getData);
+router.get('/', isAuthorized(roles.admin), authorized.getData);
 
 router.post(
   '/',
@@ -79,27 +79,8 @@ router.post(
       },
     );
   },
-  isAuthorized(roles.dataEntry),
-  unAuthorized.uploadData,
-);
-
-router.delete(
-  '/:id',
-  (req, res, next) => {
-    validation(
-      req,
-      res,
-      next,
-      {
-        id: req.params.id,
-      },
-      {
-        id: 'required|string',
-      },
-    );
-  },
   isAuthorized(roles.admin),
-  unAuthorized.deleteRecord,
+  authorized.uploadData,
 );
 
 module.exports = router;

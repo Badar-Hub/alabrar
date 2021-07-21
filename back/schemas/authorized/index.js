@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const UnAuthorized = new mongoose.Schema({
+const Authorized = new mongoose.Schema({
   blockCode: {
     type: Number,
   },
@@ -96,4 +96,4 @@ const UnAuthorized = new mongoose.Schema({
   },
 });
 
-export const UnAuthorizedSchema = mongoose.model('UnAuthorized', UnAuthorized);
+export const AuthorizedSchema = mongoose.model('Authorized', Authorized);

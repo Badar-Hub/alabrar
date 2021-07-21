@@ -1,6 +1,6 @@
 import { logger } from '~/utils';
 import { status } from '~/constants';
-import { UnAuthorizedSchema } from '~/schemas';
+import { AuthorizedSchema } from '~/schemas';
 
 export const uploadData = async (req, res) => {
   const { OK, SERVER_ERROR } = status;
@@ -42,7 +42,7 @@ export const uploadData = async (req, res) => {
 
     const user = req.user;
 
-    const data = new UnAuthorizedSchema({
+    const data = new AuthorizedSchema({
       blockCode,
       constituencyName,
       moza,

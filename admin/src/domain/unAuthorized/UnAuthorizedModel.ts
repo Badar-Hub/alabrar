@@ -1,4 +1,5 @@
 export default interface UnAuthorizedModel {
+  _id?: string;
   blockCode: number;
   constituencyName: string;
   moza: string;
