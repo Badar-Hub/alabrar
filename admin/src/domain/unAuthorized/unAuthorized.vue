@@ -19,16 +19,30 @@
         </q-card-section>
 
         <q-separator />
+        
+        <q-card-actions class="row justify-between">
+          <q-btn
+            label="View All Fields"
+            color="primary"
+            unelevated
+            @click="viewData(data._id)"
+          />
 
-        <q-card-actions align="right">
-          <q-btn color="red" @click="reject(data)" unelevated>Reject</q-btn>
-          <q-btn color="primary" @click="approved(data)" unelevated
-            >Approve</q-btn
-          >
+          <div>
+            <q-btn class="q-mx-sm" color="red" @click="reject(data)" unelevated>Reject</q-btn>
+            <q-btn class="q-mx-sm" color="primary" @click="approved(data)" unelevated
+              >Approve</q-btn
+            >
+          </div>
         </q-card-actions>
       </q-card>
     </div>
-    <UnAuthorizedModal v-model="unAuthorizedModal" />
+    <UnAuthorizedModal
+      :readOnlyData="viewAllFields"
+      :id="dataId"
+      :isReading="disableFields"
+      v-model="unAuthorizedModal"
+    />
   </div>
 </template>
 
@@ -38,6 +52,7 @@ import { ref, defineComponent, onMounted } from "vue";
 import UnAuthorizedModal from "./unAuthorizedModal.vue";
 import UnAuthorizedModel from "./UnAuthorizedModel";
 import UnAuthorizedService from "./unAuthorizedService";
+
 export default defineComponent({
   components: {
     UnAuthorizedModal,
@@ -47,10 +62,22 @@ export default defineComponent({
     const isLoading = ref(false);
     const unauthorizedData = ref([]);
     const $q = useQuasar();
+    const disableFields = ref(false);
+    const dataId = ref({});
 
     const unAuthorizedList = async () => {
       try {
         return (unauthorizedData.value = await UnAuthorizedService.getUnAuthorized());
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const viewData = async (id: string) => {
+      try {
+        dataId.value = id;
+        disableFields.value = true;
+        unAuthorizedModal.value = !unAuthorizedModal.value;
       } catch (error) {
         console.log(error);
       }
@@ -82,6 +109,9 @@ export default defineComponent({
       unAuthorizedModal,
       unauthorizedData,
       approved,
+      viewData,
+      disableFields,
+      dataId,
     };
   },
 });

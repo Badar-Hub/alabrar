@@ -11,7 +11,7 @@
         <slot></slot>
       </q-card-section>
 
-      <q-card-actions>
+      <q-card-actions v-if="noActionBtn">
         <q-btn flat label="Close" v-close-popup />
         <q-btn flat label="Submit" @click="$emit('submit')" />
       </q-card-actions>
@@ -25,6 +25,10 @@ import { defineComponent } from "vue";
 export default defineComponent({
   props: {
     title: String,
+    noActionBtn: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   emits: ["submit"],
 });

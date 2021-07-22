@@ -1,57 +1,91 @@
 <template>
-  <Modal @submit="onSubmit" title="Add New Unauthorized Record">
+  <Modal
+    :noActionBtn="!isReading"
+    @submit="onSubmit"
+    title="Add New Record"
+  >
     <q-form>
       <div class="row">
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
           <q-input
             type="number"
             label="Block Code"
+            :disable="isReading"
             v-model.number="data.blockCode"
           />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Constituency Name" v-model="data.constituencyName" />
+          <q-input
+            :disable="isReading"
+            label="Constituency Name"
+            v-model="data.constituencyName"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Moza" v-model="data.moza" />
+          <q-input :disable="isReading" label="Moza" v-model="data.moza" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Dehya" v-model="data.dehya" />
+          <q-input :disable="isReading" label="Dehya" v-model="data.dehya" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="City" v-model="data.city" />
+          <q-input :disable="isReading" label="City" v-model="data.city" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Patwar Halka" v-model="data.patwarHalka" />
+          <q-input
+            :disable="isReading"
+            label="Patwar Halka"
+            v-model="data.patwarHalka"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Tapaydar" v-model="data.tapaydar" />
+          <q-input
+            :disable="isReading"
+            label="Tapaydar"
+            v-model="data.tapaydar"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Tehseel" v-model="data.tehseel" />
+          <q-input
+            :disable="isReading"
+            label="Tehseel"
+            v-model="data.tehseel"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Talka" v-model="data.talka" />
+          <q-input :disable="isReading" label="Talka" v-model="data.talka" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="District" v-model="data.district" />
+          <q-input
+            :disable="isReading"
+            label="District"
+            v-model="data.district"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="UnionCouncil" v-model="data.unionCouncil" />
+          <q-input
+            :disable="isReading"
+            label="UnionCouncil"
+            v-model="data.unionCouncil"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="BookNo" v-model="data.bookNo" />
+          <q-input :disable="isReading" label="BookNo" v-model="data.bookNo" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Constituency" v-model="data.constituency" />
+          <q-input
+            :disable="isReading"
+            label="Constituency"
+            v-model="data.constituency"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Gender" v-model="data.gender" />
+          <q-input :disable="isReading" label="Gender" v-model="data.gender" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
           <q-input
             type="number"
             label="Vote S No"
+            :disable="isReading"
             v-model.number="data.voteSNo"
           />
         </div>
@@ -59,58 +93,90 @@
           <q-input
             type="number"
             label="Family No"
+            :disable="isReading"
             v-model.number="data.familyNo"
           />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Name" v-model="data.name" />
+          <q-input :disable="isReading" label="Name" v-model="data.name" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Marital Status" v-model="data.maritalStatus" />
+          <q-input
+            :disable="isReading"
+            label="Marital Status"
+            v-model="data.maritalStatus"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
           <q-input
             label="Father | Husband Name"
+            :disable="isReading"
             v-model="data.fatherHusbandName"
           />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input type="number" label="Nic" v-model.number="data.nic" />
+          <q-input
+            :disable="isReading"
+            type="number"
+            label="Nic"
+            v-model.number="data.nic"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input type="number" label="Age" v-model.number="data.age" />
+          <q-input
+            :disable="isReading"
+            type="number"
+            label="Age"
+            v-model.number="data.age"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="House No" v-model="data.houseNo" />
+          <q-input
+            :disable="isReading"
+            label="House No"
+            v-model="data.houseNo"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Street" v-model="data.street" />
+          <q-input :disable="isReading" label="Street" v-model="data.street" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Phase" v-model="data.phase" />
+          <q-input :disable="isReading" label="Phase" v-model="data.phase" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Sector" v-model="data.sector" />
+          <q-input :disable="isReading" label="Sector" v-model="data.sector" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Lane" v-model="data.lane" />
+          <q-input :disable="isReading" label="Lane" v-model="data.lane" />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Boulevard Avenue" v-model="data.boulevardAvenue" />
+          <q-input
+            :disable="isReading"
+            label="Boulevard Avenue"
+            v-model="data.boulevardAvenue"
+          />
         </div>
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
-          <q-input label="Other Area" v-model="data.otherArea" />
+          <q-input
+            :disable="isReading"
+            label="Other Area"
+            v-model="data.otherArea"
+          />
         </div>
         <div class="col col-xs-12 col-sm-8 q-pa-sm">
-          <q-input label="Address" v-model="data.address" />
+          <q-input
+            :disable="isReading"
+            label="Address"
+            v-model="data.address"
+          />
         </div>
       </div>
     </q-form>
   </Modal>
 </template>
 
-<script>
-import { ref, defineComponent } from "vue";
+<script lang="ts">
+import { ref, defineComponent, watch } from "vue";
 import Modal from "@/components/general/Modal";
 import UnAuthorizedService from "./unAuthorizedService";
 // import UnauthorizedModel from "./UnAuthorizedModel";
@@ -118,7 +184,15 @@ export default defineComponent({
   components: {
     Modal,
   },
-  setup() {
+  props: {
+    isReading: {
+      type: Boolean,
+    },
+    id: {
+      type: String,
+    },
+  },
+  setup(props) {
     const data = ref({
       blockCode: 0,
       constituencyName: "",
@@ -161,6 +235,22 @@ export default defineComponent({
         console.log(error);
       }
     };
+
+    const getData = async () => {
+      try {
+        data.value = await UnAuthorizedService.getUnAuthorizedDataById(
+          props.id
+        );
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    watch(
+      () => props.id,
+      () => getData()
+    );
 
     return {
       data,

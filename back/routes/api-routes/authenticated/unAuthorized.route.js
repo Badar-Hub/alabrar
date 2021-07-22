@@ -8,6 +8,25 @@ const router = express.Router();
 
 router.get('/', isAuthorized(roles.admin), unAuthorized.getData);
 
+router.get(
+  '/:id',
+  (req, res, next) => {
+    validation(
+      req,
+      res,
+      next,
+      {
+        id: req.params.id,
+      },
+      {
+        id: 'required|string',
+      },
+    );
+  },
+  isAuthorized(roles.admin),
+  unAuthorized.getDataById,
+);
+
 router.post(
   '/',
   (req, res, next) => {

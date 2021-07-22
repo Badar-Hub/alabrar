@@ -38,9 +38,10 @@ export const uploadData = async (req, res) => {
       boulevardAvenue,
       otherArea,
       address,
+      user,
     } = req.body;
 
-    const user = req.user;
+    const verifiedBy = req.user;
 
     const data = new AuthorizedSchema({
       blockCode,
@@ -72,10 +73,11 @@ export const uploadData = async (req, res) => {
       boulevardAvenue,
       otherArea,
       address,
-      user: {
-        username: user.username,
-        email: user.email,
-        role: user.role,
+      user,
+      verifiedBy: {
+        username: verifiedBy.username,
+        email: verifiedBy.email,
+        role: verifiedBy.role,
       },
       createdAt: new Date().toISOString(),
     });

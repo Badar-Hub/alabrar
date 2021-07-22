@@ -44,10 +44,19 @@ export default class UnAuthorized {
         UnAuthorized.baseUrl[1],
         newAuthorizedData
       );
-      if(data.data) {
-        await UnAuthorized.deleteRecord(newAuthorizedData._id!)
+      if (data.data) {
+        await UnAuthorized.deleteRecord(newAuthorizedData._id!);
       }
       return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  static async getUnAuthorizedDataById(id: string) {
+    try {
+      console.log(id)
+      const data = await ApiService.get(`${UnAuthorized.baseUrl[0]}/${id}`);
+      return data.data;
     } catch (error) {
       console.log(error);
     }

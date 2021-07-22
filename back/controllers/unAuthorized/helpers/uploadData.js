@@ -77,7 +77,7 @@ export const uploadData = async (req, res) => {
         email: user.email,
         role: user.role,
       },
-      createdAt: new Date().toISOString(),
+      createdAt: new Date().toISOString()
     });
 
     await data.save();

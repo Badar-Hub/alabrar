@@ -8,7 +8,9 @@
       <q-card class="my-card">
         <q-card-section class="bg-primary text-white">
           <div class="text-body1">Name: {{ data.name }}</div>
-          <!-- <div class="text-body1">User: {{ data.user.email }}</div> -->
+          <div class="text-body1">User: {{ data.user.email }}</div>
+          <div class="text-body1">User: {{ data.user.username }}</div>
+          <div class="text-body1">User: {{ data.user.role }}</div>
         </q-card-section>
 
         <q-separator />

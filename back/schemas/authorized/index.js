@@ -91,6 +91,9 @@ const Authorized = new mongoose.Schema({
   user: {
     type: Object,
   },
+  verifiedBy: {
+    type: Object,
+  },
   createdAt: {
     type: String,
   },

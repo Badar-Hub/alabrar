@@ -1,12 +1,12 @@
 import { ApiService } from "@/services/ApiServices";
 import UserModel from "./UserModel";
 export class UserService {
-  static baseUrl = "auth";
+  static baseUrl = ["auth", "userDashboard"];
 
   static async registerUser(registerUser: UserModel) {
     try {
       const data = await ApiService.post(
-        `${UserService.baseUrl}/register`,
+        `${UserService.baseUrl[0]}/register`,
         registerUser
       );
       console.log(data);
@@ -19,7 +19,7 @@ export class UserService {
   static async loginUser(loginUser: UserModel) {
     try {
       const data = await ApiService.post(
-        `${UserService.baseUrl}/login`,
+        `${UserService.baseUrl[0]}/login`,
         loginUser
       );
       console.log(data);
@@ -31,7 +31,7 @@ export class UserService {
 
   static async validateToken() {
     try {
-      const data = await ApiService.get(`${UserService.baseUrl}/validateToken`);
+      const data = await ApiService.get(`${UserService.baseUrl[0]}/validateToken`);
       console.log(data);
       return data;
     } catch (error) {
@@ -41,7 +41,7 @@ export class UserService {
 
   static async allUsers() {
     try {
-      const data = await ApiService.get(`${UserService.baseUrl}/allusers`);
+      const data = await ApiService.get(`${UserService.baseUrl[0]}/allusers`);
       return data.data;
     } catch (error) {
       console.log(error);
@@ -50,7 +50,7 @@ export class UserService {
 
   static async approval(userId: string, isApproved: boolean) {
     try {
-      const data = await ApiService.put(`${UserService.baseUrl}/approval`, {
+      const data = await ApiService.put(`${UserService.baseUrl[0]}/approval`, {
         userId,
         isApproved,
       });
