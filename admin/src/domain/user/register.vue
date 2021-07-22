@@ -6,6 +6,9 @@
           <q-input label="Email" type="email" v-model="user.email" />
         </div>
         <div class="col-xs-12 q-my-sm">
+          <q-input label="Username" v-model="user.username" />
+        </div>
+        <div class="col-xs-12 q-my-sm">
           <q-input label="Password" type="password" v-model="user.password" />
         </div>
         <div class="col-xs-12 q-my-sm">
@@ -16,7 +19,12 @@
           />
         </div>
         <div class="col-xs-12 q-my-sm">
-            <q-btn color="primary" label="Submit" type="submit" class="full-width" />
+          <q-btn
+            color="primary"
+            label="Submit"
+            type="submit"
+            class="full-width"
+          />
         </div>
       </div>
     </q-form>
@@ -31,6 +39,7 @@ export default defineComponent({
   setup() {
     const user = ref({
       email: "",
+      username: "",
       password: "",
       confirmPassword: "",
     });

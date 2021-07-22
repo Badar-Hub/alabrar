@@ -17,7 +17,7 @@
         v-for="(data, index) in unauthorizedData"
         :key="index"
       >
-        <q-card class="my-card">
+        <q-card v-if="data.user" class="my-card">
           <q-card-section class="bg-primary text-white">
             <div class="text-body1">Name: {{ data.name }}</div>
             <div class="text-body1">Username: {{ data.user.username }}</div>

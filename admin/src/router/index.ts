@@ -39,4 +39,12 @@ const router = createRouter({
   routes,
 });
 
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some((route) => route.meta.requiresAuth)) {
+//     next();
+//   } else {
+//     next();
+//   }
+// });
+
 export default router;

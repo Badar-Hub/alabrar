@@ -2,7 +2,7 @@
   <div v-if="isLoading">
     <h1>Loading...</h1>
   </div>
-  <div v-else>
+  <div v-else-if="userData">
     <div class="row justify-center">
       <h5>Accuracy Rate: 100%</h5>
     </div>
