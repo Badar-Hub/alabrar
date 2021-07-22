@@ -7,15 +7,36 @@
     >
       <q-card class="my-card">
         <q-card-section class="bg-primary text-white">
-          <div class="text-body1">Email Address: {{ user.email }}</div>
-          <div class="text-body1">Username: {{ user.username }}</div>
-          <div class="text-body1">Approval Status: {{ user.isApproved ? 'Approved' : 'Not Approved'}}</div>
+          <div class="text-body1 q-py-sm">Email Address: {{ user.email }}</div>
+          <div class="text-body1 q-py-sm">Username: {{ user.username }}</div>
+          <div class="text-body1 q-py-sm">
+            Approval Status: {{ user.isApproved ? "Approved" : "Not Approved" }}
+          </div>
         </q-card-section>
 
         <q-separator />
 
+        <div class="row">
+          <div class="col-xs-12">
+            <q-input
+              v-if="user.isModified"
+              class="q-mx-md"
+              label="Rate"
+              v-model="rate"
+            />
+            <p
+              @click="user.isModified = !user.isModified"
+              class="text-body1 q-px-md q-my-sm"
+              v-else
+            >
+              {{ user.isModified ? user.rate : `Rs: ${user.rate} - Click here to change User Rate` }}
+            </p>
+          </div>
+        </div>
         <q-card-actions align="right">
-          <q-btn color="red" @click="rejectUser(user._id)" unelevated>Reject</q-btn>
+          <q-btn color="red" @click="rejectUser(user._id)" unelevated
+            >Reject</q-btn
+          >
           <q-btn color="primary" @click="approvedUser(user._id)" unelevated
             >Approve</q-btn
           >
@@ -34,10 +55,12 @@ export default defineComponent({
   setup() {
     const users = ref([]);
     const $q = useQuasar();
+    const rate = ref(0);
 
     const getUsers = async () => {
       try {
-        return (users.value = await UserService.allUsers());
+        const req = await UserService.allUsers();
+        users.value = req.map((x: any) => ({ ...x, isModified: false }));
       } catch (error) {
         console.log(error);
       }
@@ -45,7 +68,7 @@ export default defineComponent({
 
     const approvedUser = async (userId: string) => {
       try {
-        const user = await UserService.approval(userId, true);
+        const user = await UserService.approval(userId, true, rate.value);
         getUsers();
         $q.notify({
           color: "primary",
@@ -59,8 +82,9 @@ export default defineComponent({
 
     const rejectUser = async (userId: string) => {
       try {
-        const user = await UserService.approval(userId, false);
+        const user = await UserService.approval(userId, false, rate.value);
         getUsers();
+        console.log(getUsers());
         $q.notify({
           color: "danger",
           message: `This User is blocked`,
@@ -82,7 +106,8 @@ export default defineComponent({
     return {
       users,
       approvedUser,
-      rejectUser
+      rejectUser,
+      rate,
     };
   },
 });

@@ -7,7 +7,7 @@ export const approveAccount = async (req, res) => {
   const { OK, SERVER_ERROR, UNAUTHROIZED } = status;
 
   //Destructuring email, remember_me & password from body
-  const { userId, isApproved } = req.body;
+  const { userId, rate, isApproved } = req.body;
 
   try {
     //Making sure that the user exists
@@ -26,6 +26,7 @@ export const approveAccount = async (req, res) => {
       { _id: userId },
       {
         $set: {
+          rate,
           isApproved,
         },
       },

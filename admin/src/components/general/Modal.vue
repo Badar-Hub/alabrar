@@ -11,7 +11,7 @@
         <slot></slot>
       </q-card-section>
 
-      <q-card-actions v-if="noActionBtn">
+      <q-card-actions v-if="!noActionBtn">
         <q-btn flat label="Close" v-close-popup />
         <q-btn flat label="Submit" @click="$emit('submit')" />
       </q-card-actions>

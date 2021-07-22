@@ -11,31 +11,48 @@
       />
     </div>
     <hr />
-    <div v-for="(data, index) in unauthorizedData" :key="index">
-      <q-card class="my-card">
-        <q-card-section class="bg-primary text-white">
-          <div class="text-body1">Name: {{ data.name }}</div>
-          <!-- <div class="text-body1">User: {{ data.user.email }}</div> -->
-        </q-card-section>
+    <div class="row">
+      <div
+        class="col-xs-12 col-sm-4 q-pa-sm"
+        v-for="(data, index) in unauthorizedData"
+        :key="index"
+      >
+        <q-card class="my-card">
+          <q-card-section class="bg-primary text-white">
+            <div class="text-body1">Name: {{ data.name }}</div>
+            <div class="text-body1">Username: {{ data.user.username }}</div>
+            <div class="text-body1">Email: {{ data.user.email }}</div>
+          </q-card-section>
 
-        <q-separator />
-        
-        <q-card-actions class="row justify-between">
-          <q-btn
-            label="View All Fields"
-            color="primary"
-            unelevated
-            @click="viewData(data._id)"
-          />
+          <q-separator />
 
-          <div>
-            <q-btn class="q-mx-sm" color="red" @click="reject(data)" unelevated>Reject</q-btn>
-            <q-btn class="q-mx-sm" color="primary" @click="approved(data)" unelevated
-              >Approve</q-btn
-            >
+          <div class="row justify-center q-my-sm">
+            <q-btn
+              class="full-width q-pa-sm"
+              label="View All Fields"
+              color="primary"
+              unelevated
+              @click="viewData(data._id)"
+            />
           </div>
-        </q-card-actions>
-      </q-card>
+          <q-card-actions class="row justify-between">
+              <q-btn
+                class="q-mx-sm"
+                color="red"
+                @click="reject(data)"
+                unelevated
+                >Reject</q-btn
+              >
+              <q-btn
+                class="q-mx-sm"
+                color="primary"
+                @click="approved(data)"
+                unelevated
+                >Approve</q-btn
+              >
+          </q-card-actions>
+        </q-card>
+      </div>
     </div>
     <UnAuthorizedModal
       :readOnlyData="viewAllFields"

@@ -83,4 +83,23 @@ router.post(
   authorized.uploadData,
 );
 
+router.delete(
+  '/:id',
+  (req, res, next) => {
+    validation(
+      req,
+      res,
+      next,
+      {
+        id: req.params.id,
+      },
+      {
+        id: 'required|string',
+      },
+    );
+  },
+  isAuthorized(roles.admin),
+  authorized.deleteData,
+);
+
 module.exports = router;

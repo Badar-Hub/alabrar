@@ -40,6 +40,7 @@ export default {
         if (data.data) {
           isTokenValidated.value = true;
           store.dispatch("setUser", data.data.user);
+          console.log(data.data.user);
           router.beforeEach((to, from, next) => {
             if (to.matched.some((route) => route.meta.requiresAuth)) {
               console.log(store.getters);

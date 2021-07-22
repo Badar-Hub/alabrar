@@ -31,7 +31,9 @@ export class UserService {
 
   static async validateToken() {
     try {
-      const data = await ApiService.get(`${UserService.baseUrl[0]}/validateToken`);
+      const data = await ApiService.get(
+        `${UserService.baseUrl[0]}/validateToken`
+      );
       console.log(data);
       return data;
     } catch (error) {
@@ -48,11 +50,12 @@ export class UserService {
     }
   }
 
-  static async approval(userId: string, isApproved: boolean) {
+  static async approval(userId: string, isApproved: boolean, rate: number) {
     try {
       const data = await ApiService.put(`${UserService.baseUrl[0]}/approval`, {
         userId,
         isApproved,
+        rate,
       });
       return data.data;
     } catch (error) {

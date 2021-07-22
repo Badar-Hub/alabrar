@@ -80,4 +80,6 @@ router.patch(
   profile.changePassword,
 );
 
+router.get('/', profile.userData);
+
 module.exports = router;

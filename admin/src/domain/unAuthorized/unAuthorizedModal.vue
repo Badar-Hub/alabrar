@@ -1,9 +1,5 @@
 <template>
-  <Modal
-    :noActionBtn="!isReading"
-    @submit="onSubmit"
-    title="Add New Record"
-  >
+  <Modal :noActionBtn="isReading" @submit="submitAction" title="Add New Record">
     <q-form>
       <div class="row">
         <div class="col col-xs-12 col-sm-4 q-pa-sm">
@@ -172,17 +168,25 @@
         </div>
       </div>
     </q-form>
+    <ConfirmationDialog
+      title="Add New Record"
+      action="submit"
+      v-model="confirmation"
+      @onSubmit="onSubmit"
+    />
   </Modal>
 </template>
 
 <script lang="ts">
 import { ref, defineComponent, watch } from "vue";
-import Modal from "@/components/general/Modal";
+import Modal from "@/components/general/Modal.vue";
+import ConfirmationDialog from "@/components/general/ConfirmationDialog.vue";
 import UnAuthorizedService from "./unAuthorizedService";
 // import UnauthorizedModel from "./UnAuthorizedModel";
 export default defineComponent({
   components: {
     Modal,
+    ConfirmationDialog,
   },
   props: {
     isReading: {
@@ -224,12 +228,18 @@ export default defineComponent({
       otherArea: "",
       address: "",
     });
+    const confirmation = ref(false);
+
+    const submitAction = () => {
+      confirmation.value = true;
+    };
 
     const onSubmit = async () => {
       try {
         const req = await UnAuthorizedService.addNewUnauthorizedData(
           data.value
         );
+        confirmation.value = false;
         return req.data;
       } catch (error) {
         console.log(error);
@@ -239,7 +249,7 @@ export default defineComponent({
     const getData = async () => {
       try {
         data.value = await UnAuthorizedService.getUnAuthorizedDataById(
-          props.id
+          props.id!
         );
         return data;
       } catch (error) {
@@ -248,13 +258,15 @@ export default defineComponent({
     };
 
     watch(
-      () => props.id,
+      () => props.id!.length > 1,
       () => getData()
     );
 
     return {
       data,
       onSubmit,
+      confirmation,
+      submitAction,
     };
   },
 });

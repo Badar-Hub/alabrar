@@ -5,7 +5,7 @@ const routes = [
   {
     path: "/",
     name: "Dashboard",
-    component: Home,
+    component: () => import("@/domain/dashboard/dashboard.vue"),
   },
   {
     path: "/dataEntry",
